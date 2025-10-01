@@ -1,0 +1,31 @@
+services:
+  db: # Defines a service named 'db' for the PostgreSQL container
+    image: postgres:15 # Uses the official PostgreSQL image, version 15
+    restart: always # Ensures the container restarts automatically if it stops
+    environment: # Sets environment variables for the PostgreSQL container
+      POSTGRES_USER: ${DB_USER:-user} # Defines the PostgreSQL username
+      POSTGRES_PASSWORD: ${DB_PASS:-nKF3pB[lI4&5} # Defines the PostgreSQL password
+      POSTGRES_DB: ${DB_NAME:-db} # Defines the default database to be created
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432" # Maps port 5432 on the host to port 5432 in the container
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Mounts a named volume for persistent data storage
+  dozzle:
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/data
+    ports:
+      - 8080:8080
+    environment:
+      DOZZLE_AUTH_PROVIDER: simple
+    secrets:
+      - source: users
+        target: users.yml
+volumes:
+  pgdata: # Defines the named volume for PostgreSQL data
+secrets:
+  users:
+    file: users.yml

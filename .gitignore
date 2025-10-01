@@ -1,0 +1,34 @@
+web/test-results
+web/node_modules
+
+# Output
+web/.output
+web/.vercel
+web/.netlify
+web/.wrangler
+web/.svelte-kit
+web/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+web/vite.config.js.timestamp-*
+web/vite.config.ts.timestamp-*
+
+# Paraglide
+web/src/lib/paraglide
+
+*storybook.log
+web/storybook-static
+
+app/node_modules
+app/dist
+app/.env
