@@ -31,7 +31,7 @@ const loginSchema = z.object({
     email: z.email().trim()
 })
 
-const createAlias = (name: string) => {
+export const createAlias = (name: string) => {
     const words = name.split(' ');
     // If there is only one word, return the first two characters
     if (words.length < 2) {
