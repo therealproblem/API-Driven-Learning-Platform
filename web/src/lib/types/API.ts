@@ -1,4 +1,4 @@
 export enum APIState {
-    loading,
-    completed
+	loading,
+	completed
 }

@@ -1,4 +1,5 @@
 export default interface Config {
-    api: string;
-    nodeEnv: string;
+	api: string;
+	web: string;
+	nodeEnv: string;
 }

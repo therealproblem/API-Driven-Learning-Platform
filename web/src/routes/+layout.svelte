@@ -14,6 +14,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>Courses</title>
 </svelte:head>
 
 <Sidebar.Provider
