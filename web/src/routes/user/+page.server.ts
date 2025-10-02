@@ -1,9 +1,8 @@
 import type { Actions } from './$types';
 import { fail, type Cookies } from "@sveltejs/kit";
 import { z } from 'zod';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import config from '../../config/config';
-import type { AxiosError } from 'axios';
 
 const MAX_TOKEN_AGE = 60 * 15;
 const MAX_REFRESH_TOKEN_AGE = 60 * 60 * 24 * 7;
@@ -12,9 +11,9 @@ const registerSchema = z.object({
     password: z.string()
         .min(8, 'Password must be at least 8 characters long')
         .max(16, 'Password cannot exceed 16 characters')
-        // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-        // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-        // .regex(/[0-9]/, "Password must contain at least one number")
+        .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+        .regex(/[0-9]/, "Password must contain at least one number")
         .trim(),
     email: z.email().trim(),
     confirmPassword: z.string().trim(),
@@ -57,8 +56,9 @@ export const actions = {
                     'Cookie': cookiesHeader
                 }
             });
-        } catch (err: AxiosError) {
-            return fail(400, { message: err.response.data.error, error: true });
+        } catch (err: unknown) {
+            const error = err as AxiosError;
+            return fail(400, { message: (error.response?.data as { error: string }).error, error: true });
         }
 
         setTokenCookies(cookies, res.headers['set-cookie']);
@@ -77,8 +77,9 @@ export const actions = {
                     'Cookie': cookiesHeader
                 }
             });
-        } catch (err: AxiosError) {
-            return fail(400, { message: err.response.data.error, error: true });
+        } catch (err) {
+            const error = err as AxiosError;
+            return fail(400, { message: (error.response?.data as { error: string }).error, error: true });
         }
 
         setTokenCookies(cookies, res.headers['set-cookie']);
