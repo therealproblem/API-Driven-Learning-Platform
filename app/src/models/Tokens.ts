@@ -1,4 +1,4 @@
 export default interface Tokens {
-    jwt: string;
-    refresh: string;
+	jwt: string;
+	refresh: string;
 }

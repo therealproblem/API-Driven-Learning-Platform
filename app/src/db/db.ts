@@ -6,12 +6,12 @@ import 'dotenv/config'; // Load environment variables
 import config from '../config/config.ts';
 
 const pool = new Pool({
-  host: dbConfig.host,
-  port: dbConfig.port,
-  user: dbConfig.user,
-  password: dbConfig.password,
-  database: dbConfig.name,
-  ssl: config.nodeEnv === "production" ? { rejectUnauthorized: false } : false,
+	host: dbConfig.host,
+	port: dbConfig.port,
+	user: dbConfig.user,
+	password: dbConfig.password,
+	database: dbConfig.name,
+	ssl: config.nodeEnv === 'production' ? { rejectUnauthorized: false } : false
 });
 
 const db = drizzle(pool, { schema });

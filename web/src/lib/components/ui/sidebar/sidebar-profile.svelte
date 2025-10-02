@@ -11,9 +11,9 @@
 	let name = $state(get(Profile.name));
 	let email = $state(get(Profile.email));
 
-	Profile.alias.subscribe(value => alias = value);
-	Profile.name.subscribe(value => name = value);
-	Profile.email.subscribe(value => email = value);
+	Profile.alias.subscribe((value) => (alias = value));
+	Profile.name.subscribe((value) => (name = value));
+	Profile.email.subscribe((value) => (email = value));
 
 	let showLogin = $state(false);
 	let isLogin = $state(true);

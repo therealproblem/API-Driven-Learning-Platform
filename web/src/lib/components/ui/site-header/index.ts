@@ -1,7 +1,7 @@
-import Root from "./site-header.svelte";
+import Root from './site-header.svelte';
 
 export {
 	Root,
 	//
-	Root as SiteHeader,
+	Root as SiteHeader
 };

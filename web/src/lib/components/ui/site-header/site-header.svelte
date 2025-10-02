@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '@/components/ui/button/index.js';
 	import { Separator } from '@/components/ui/separator/index.js';
 	import * as Sidebar from '@/components/ui/sidebar/index.js';
 </script>

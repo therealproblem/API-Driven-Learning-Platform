@@ -48,7 +48,7 @@
 					<form
 						method="post"
 						action={isLogin ? '/user?/login' : '/user?/register'}
-						use:enhance={({ formElement, formData, action, cancel }) => {
+						use:enhance={({}) => {
 							return async ({ result }) => {
 								switch (result.type) {
 									case 'failure':
