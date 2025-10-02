@@ -2,7 +2,8 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
+		"module": "nodenext",
+		"noEmit": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "types": [],
@@ -30,7 +31,9 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "nodenext",
+		"allowImportingTsExtensions": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
