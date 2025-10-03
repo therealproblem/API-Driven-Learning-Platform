@@ -7,8 +7,8 @@ import config from '../config/config';
 import { refresh } from '../controllers/usersController';
 import { getUserByEmail } from '../db/services/usersService';
 
-const publicPaths = ['/user/register', '/dummy/generate'];
-const basicPaths = ['/user/login'];
+const publicPaths = ['/api/user/register', '/api/dummy/generate'];
+const basicPaths = ['/api/user/login'];
 
 const cookieExtractor = (req: Request): string | null => {
 	return req?.cookies['accessToken'];

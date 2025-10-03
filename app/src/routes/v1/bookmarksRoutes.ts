@@ -1,7 +1,8 @@
 import express from 'express';
-import { update } from '../controllers/progressController';
+import { update, list } from '../../controllers/bookmarksController';
 const router = express.Router();
 
+router.post('/list', list);
 router.post('/update', update);
 
 export default router;

@@ -15,4 +15,4 @@ const corsOptions: cors.CorsOptions = {
 	credentials: true
 };
 
-export default corsOptions;
+export default cors(corsOptions);

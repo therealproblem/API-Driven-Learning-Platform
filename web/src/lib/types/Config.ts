@@ -3,4 +3,5 @@ export default interface Config {
 	csApi: string;
 	web: string;
 	nodeEnv: string;
+	apiVersion: string;
 }
