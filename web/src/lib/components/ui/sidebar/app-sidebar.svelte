@@ -25,14 +25,14 @@
 	<Sidebar.Content>
 		<Sidebar.Group class="flex flex-col gap-2">
 			<Sidebar.Menu>
-				<Sidebar.MenuItem class="mx-5 flex items-center gap-2">
+				<Sidebar.MenuItem class="mx-5 my-1 flex items-center gap-2">
 					<Sidebar.MenuButton class={path === '/' ? activeCSS : ''}>
 						<a href="/">Courses</a>
 					</Sidebar.MenuButton>
 				</Sidebar.MenuItem>
-				<Sidebar.MenuItem class="mx-5 flex items-center gap-2">
+				<Sidebar.MenuItem class="mx-5 my-1 flex items-center gap-2">
 					<Sidebar.MenuButton class={path === '/bookmarks' ? activeCSS : ''}>
-						<a href="/bookmarks">Bookmark</a>
+						<a href="/bookmarks">Bookmarks</a>
 					</Sidebar.MenuButton>
 				</Sidebar.MenuItem>
 			</Sidebar.Menu>

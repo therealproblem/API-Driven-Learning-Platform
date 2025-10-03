@@ -6,11 +6,13 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import * as Sidebar from '@/components/ui/sidebar/index.js';
 	import AppSidebar from '@/components/ui/sidebar/app-sidebar.svelte';
+	import { Toaster } from '$lib/components/ui/sonner/index.js';
 
 	let { children } = $props();
 </script>
 
 <ModeWatcher />
+<Toaster />
 
 <svelte:head>
 	<link rel="icon" href={favicon} />

@@ -2,36 +2,20 @@ import bcrypt from 'bcrypt';
 import type { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
-import type { StrategyOptions } from 'passport-jwt';
 import { Strategy as LocalStrategy } from 'passport-local';
 import config from '../config/config.ts';
+import { refresh } from '../controllers/usersController.ts';
 import { getUserByEmail } from '../db/services/usersService.ts';
-import type Tokens from '../models/Tokens.ts';
 
-const publicPaths = ['/user/register'];
+const publicPaths = ['/user/register', '/dummy/generate'];
 const basicPaths = ['/user/login'];
 
 const cookieExtractor = (req: Request): string | null => {
-	let token: string | null = null;
-	let tokens: Tokens | null = null;
-	if (req && req.cookies) {
-		tokens = {
-			jwt: req.cookies['accessToken'],
-			refresh: req.cookies['refreshToken']
-		};
-	}
-	switch (req.path) {
-		case '/refreshToken':
-			token = tokens?.refresh ?? null;
-			break;
-		default:
-			token = tokens?.jwt ?? null;
-			break;
-	}
-	return token;
+	return req?.cookies['accessToken'];
 };
 
 passport.use(
+	'local',
 	new LocalStrategy({ usernameField: 'email' }, async (username, password, done) => {
 		const user = await getUserByEmail(username);
 		if (user === null) return done('User do not exist', false);
@@ -41,26 +25,18 @@ passport.use(
 	})
 );
 
-const jwtOptions: StrategyOptions = {
-	jwtFromRequest: cookieExtractor,
-	secretOrKey: config.jwtSecret
-};
-
 passport.use(
-	new JwtStrategy(jwtOptions, (payload, done) => {
-		// console.log(payload);
-		// try {
-		//     const user = await User.findById(payload.id); // Assuming payload contains user ID
-		//     if (user) {
-		//         return done(null, user);
-		//     }
-		//     return done(null, false);
-		// } catch (error) {
-		//     console.error(error);
-		//     return done(error, false);
-		// }
-		return done(null, {});
-	})
+	'jwt',
+	new JwtStrategy(
+		{
+			jwtFromRequest: cookieExtractor,
+			secretOrKey: config.jwtSecret
+		},
+		(payload, done) => {
+			if (payload.id === undefined || payload.id === null) return done('Unauthorized', false);
+			return done(null, payload);
+		}
+	)
 );
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -68,10 +44,12 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	passport.authenticate(
 		basicPaths.includes(req.path) ? 'local' : 'jwt',
 		{ session: false },
-		(err: unknown, user: unknown) => {
-			if (err) return next(err);
-			if (!user) return res.status(401).json({ message: 'Unauthorized' });
-			req.user = user;
+		async (err, user, info) => {
+			if (user) req.user = user;
+			if (!user && !basicPaths.includes(req.path)) {
+				const result = await refresh(req, res);
+				if (!result.success) return res.status(401).json({ message: 'Unauthorized' });
+			}
 			return next();
 		}
 	)(req, res, next);
