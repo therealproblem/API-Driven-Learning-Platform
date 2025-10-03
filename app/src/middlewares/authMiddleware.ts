@@ -44,7 +44,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	passport.authenticate(
 		basicPaths.includes(req.path) ? 'local' : 'jwt',
 		{ session: false },
-		async (err, user, info) => {
+		async (err, user) => {
 			if (user) req.user = user;
 			if (!user && !basicPaths.includes(req.path)) {
 				const result = await refresh(req, res);

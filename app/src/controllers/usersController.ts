@@ -4,13 +4,20 @@ import config from '../config/config';
 import { createUser, getUserByEmail } from '../db/services/usersService';
 import { hash } from '../utils/hashing';
 
+const MAX_TOKEN_AGE = '15m';
+const MAX_REFRESH_TOKEN_AGE = '7d';
+// const MAX_TOKEN_AGE = '1m';
+// const MAX_REFRESH_TOKEN_AGE = '1m';
+
 export const login = (req: Request, res: Response) => {
 	const payload = req.user;
 	if (!payload) return res.status(500).json({ error: 'Missing payload' });
 	delete (payload as { passwordHash?: string }).passwordHash;
 	delete (payload as { createdAt?: Date }).createdAt;
-	const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '15m' });
-	const refreshToken = jwt.sign(payload, config.refreshTokenSecret, { expiresIn: '7d' });
+	const token = jwt.sign(payload, config.jwtSecret, { expiresIn: MAX_TOKEN_AGE });
+	const refreshToken = jwt.sign(payload, config.refreshTokenSecret, {
+		expiresIn: MAX_REFRESH_TOKEN_AGE
+	});
 	res.cookie('accessToken', token);
 	res.cookie('refreshToken', refreshToken);
 	return res.status(200).json({ result: payload });
@@ -26,8 +33,10 @@ export const register = async (req: Request, res: Response) => {
 
 	delete (newUser as { passwordHash?: string }).passwordHash;
 	delete (newUser as { createdAt?: Date }).createdAt;
-	const token = jwt.sign(newUser, config.jwtSecret, { expiresIn: '1m' });
-	const refreshToken = jwt.sign(newUser, config.refreshTokenSecret, { expiresIn: '7d' });
+	const token = jwt.sign(newUser, config.jwtSecret, { expiresIn: MAX_TOKEN_AGE });
+	const refreshToken = jwt.sign(newUser, config.refreshTokenSecret, {
+		expiresIn: MAX_REFRESH_TOKEN_AGE
+	});
 	res.cookie('accessToken', token);
 	res.cookie('refreshToken', refreshToken);
 
@@ -39,8 +48,10 @@ export const refresh = async (req: Request, res: Response) => {
 		const payload = jwt.verify(req.cookies['refreshToken'], config.refreshTokenSecret);
 		delete payload['iat'];
 		delete payload['exp'];
-		const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '1m' });
-		const refreshToken = jwt.sign(payload, config.refreshTokenSecret, { expiresIn: '7d' });
+		const token = jwt.sign(payload, config.jwtSecret, { expiresIn: MAX_TOKEN_AGE });
+		const refreshToken = jwt.sign(payload, config.refreshTokenSecret, {
+			expiresIn: MAX_REFRESH_TOKEN_AGE
+		});
 		res.cookie('accessToken', token);
 		res.cookie('refreshToken', refreshToken);
 		req.user = payload;

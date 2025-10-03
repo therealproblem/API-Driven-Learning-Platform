@@ -22,7 +22,7 @@
 </script>
 
 <div
-	class="absolute top-0 left-0 z-1000 flex min-h-svh min-w-svw flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10"
+	class="absolute top-0 left-0 z-1000 flex min-h-svh min-w-svw flex-col items-center justify-center gap-6 bg-black/80 p-6 md:p-10"
 >
 	<Button variant="ghost" onclick={onclose} class="absolute top-20 right-20 z-1001 cursor-pointer">
 		<Close class="size-10" />
@@ -81,6 +81,7 @@
 										name="email"
 										placeholder="john-doe@example.com"
 										required
+										value="test5@example.com"
 									/>
 								</div>
 								<div class="grid gap-3">
@@ -98,6 +99,7 @@
 										name="password"
 										placeholder="********"
 										required
+										value="Qwerty1234!"
 									/>
 								</div>
 								{#if !isLogin}

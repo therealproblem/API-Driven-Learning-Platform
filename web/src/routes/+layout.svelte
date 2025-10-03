@@ -7,6 +7,7 @@
 	import * as Sidebar from '@/components/ui/sidebar/index.js';
 	import AppSidebar from '@/components/ui/sidebar/app-sidebar.svelte';
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
+	import { page } from '$app/state';
 
 	let { children } = $props();
 </script>
@@ -16,15 +17,19 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>Courses</title>
+	<title>LXP</title>
 </svelte:head>
 
 <Sidebar.Provider
 	style="--sidebar-width: calc(var(--spacing) * 72); --header-height: calc(var(--spacing) * 12);"
 >
-	<AppSidebar />
-	<Sidebar.Inset>
-		<SiteHeader />
+	{#if page.route.id !== '/'}
+		<AppSidebar />
+		<Sidebar.Inset>
+			<SiteHeader />
+			{@render children?.()}
+		</Sidebar.Inset>
+	{:else}
 		{@render children?.()}
-	</Sidebar.Inset>
+	{/if}
 </Sidebar.Provider>

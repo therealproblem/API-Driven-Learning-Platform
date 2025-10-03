@@ -6,6 +6,7 @@
 
 	import Profile from '@/stores/user-store';
 	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
 
 	let alias = $state(get(Profile.alias));
 	let name = $state(get(Profile.name));
@@ -15,7 +16,7 @@
 	Profile.name.subscribe((value) => (name = value));
 	Profile.email.subscribe((value) => (email = value));
 
-	let showLogin = $state(false);
+	let showLogin = $state(true);
 	let isLogin = $state(true);
 
 	const logout = () => {
@@ -24,6 +25,15 @@
 		Profile.email.set('');
 		Profile.name.set('');
 	};
+
+	onMount(() => {
+		(window as any).showLogin = () => {
+			showLogin = true;
+			Profile.alias.set('P');
+			Profile.email.set('');
+			Profile.name.set('');
+		};
+	});
 </script>
 
 {#if showLogin}

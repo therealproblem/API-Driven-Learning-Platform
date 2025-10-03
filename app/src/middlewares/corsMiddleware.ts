@@ -10,7 +10,7 @@ const corsOptions: cors.CorsOptions = {
 		}
 	},
 	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-	allowedHeaders: ['Content-Type', 'Authorization'], // Allowed request headers
+	allowedHeaders: ['Content-Type', 'Cookie'], // Allowed request headers
 	credentials: true // Allow sending cookies and HTTP authentication credentials
 };
 

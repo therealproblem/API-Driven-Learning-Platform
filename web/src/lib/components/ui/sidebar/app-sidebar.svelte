@@ -14,7 +14,7 @@
 	<Sidebar.Header>
 		<Sidebar.Menu>
 			<Sidebar.MenuItem class="flex flex-row items-center justify-between">
-				<a href="/" class="mx-5 my-5 flex flex-row items-center">
+				<a href="/" class="mx-5 my-5 flex flex-row items-center" data-sveltekit-preload-data="tap">
 					<Book class="!size-7" />
 					<span class="ml-2 text-lg font-semibold">LXP</span>
 				</a>
@@ -27,12 +27,12 @@
 			<Sidebar.Menu>
 				<Sidebar.MenuItem class="mx-5 my-1 flex items-center gap-2">
 					<Sidebar.MenuButton class={path === '/' ? activeCSS : ''}>
-						<a href="/">Courses</a>
+						<a href="/courses" data-sveltekit-preload-data="tap">Courses</a>
 					</Sidebar.MenuButton>
 				</Sidebar.MenuItem>
 				<Sidebar.MenuItem class="mx-5 my-1 flex items-center gap-2">
 					<Sidebar.MenuButton class={path === '/bookmarks' ? activeCSS : ''}>
-						<a href="/bookmarks">Bookmarks</a>
+						<a href="/bookmarks" data-sveltekit-preload-data="tap">Bookmarks</a>
 					</Sidebar.MenuButton>
 				</Sidebar.MenuItem>
 			</Sidebar.Menu>
