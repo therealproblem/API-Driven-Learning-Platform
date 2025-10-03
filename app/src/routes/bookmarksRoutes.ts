@@ -1,5 +1,5 @@
 import express from 'express';
-import { update, list } from '../controllers/bookmarksController.ts';
+import { update, list } from '../controllers/bookmarksController';
 const router = express.Router();
 
 router.post('/list', list);

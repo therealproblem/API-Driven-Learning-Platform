@@ -5,7 +5,7 @@ dotenv.config();
 
 const config: Config = {
 	api: process.env['API_HOST'] || 'http://localhost:3000',
-	web: process.env['WEB_HOST'] || 'http://localhost:5173',
+	web: process.env['ORIGIN'] || 'http://localhost:5173',
 	nodeEnv: process.env['NODE_ENV'] || 'development'
 };
 

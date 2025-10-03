@@ -1,7 +1,7 @@
-import bookmarks from './bookmarksRoutes.ts';
-import courses from './coursesRoutes.ts';
-import progress from './progressRoutes.ts';
-import users from './usersRoutes.ts';
+import bookmarks from './bookmarksRoutes';
+import courses from './coursesRoutes';
+import progress from './progressRoutes';
+import users from './usersRoutes';
 
 export default {
 	bookmarks,

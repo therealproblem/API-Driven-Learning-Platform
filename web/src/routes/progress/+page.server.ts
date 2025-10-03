@@ -3,7 +3,7 @@ import { fail } from '@sveltejs/kit';
 import axios, { AxiosError } from 'axios';
 import config from '../../config/config';
 import { z } from 'zod';
-import { setTokenCookies } from '@/token-utils';
+import { setTokenCookies } from '@/utils/cookies';
 
 const updateSchema = z.object({
 	id: z.string(),

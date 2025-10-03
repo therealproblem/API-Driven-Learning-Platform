@@ -1,4 +1,4 @@
-import config from '../config/config';
+import config from '../../config/config';
 import type { Cookies } from '@sveltejs/kit';
 const MAX_TOKEN_AGE = 60 * 15;
 const MAX_REFRESH_TOKEN_AGE = 60 * 60 * 24 * 7;

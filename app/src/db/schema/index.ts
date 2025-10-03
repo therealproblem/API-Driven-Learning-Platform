@@ -1,7 +1,7 @@
-import bookmarks from './bookmark.ts';
-import courses from './courses.ts';
-import progress from './progress.ts';
-import users from './users.ts';
+import bookmarks from './bookmarks';
+import courses from './courses';
+import progress from './progress';
+import users from './users';
 
 export default {
 	users,
