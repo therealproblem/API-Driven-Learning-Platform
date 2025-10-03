@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import db from '../db.ts';
-import users from '../schema/users.ts';
+import db from '../db.js';
+import users from '../schema/users.js';
 
 export const getUserByEmail = async (email: string) => {
 	email = email.toLowerCase();

@@ -2,9 +2,9 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import passport from 'passport';
-import authMiddleware from './middlewares/authMiddleware.ts';
-import errorMiddleware from './middlewares/errorMiddleware.ts';
-import routes from './routes/index.ts';
+import authMiddleware from './middlewares/authMiddleware.js';
+import errorMiddleware from './middlewares/errorMiddleware.js';
+import routes from './routes/index.js';
 
 const app = express();
 

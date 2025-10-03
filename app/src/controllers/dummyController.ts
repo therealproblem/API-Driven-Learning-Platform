@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express';
-import { insertBookmark } from '../db/services/bookmarksService.ts';
-import { insertCourse } from '../db/services/coursesService.ts';
-import { insertProgress } from '../db/services/progressService.ts';
-import { createUser } from '../db/services/usersService.ts';
-import { hash } from '../utils/hashing.ts';
+import { insertBookmark } from '../db/services/bookmarksService.js';
+import { insertCourse } from '../db/services/coursesService.js';
+import { insertProgress } from '../db/services/progressService.js';
+import { createUser } from '../db/services/usersService.js';
+import { hash } from '../utils/hashing.js';
 
 interface dummyVideo {
 	id: string;

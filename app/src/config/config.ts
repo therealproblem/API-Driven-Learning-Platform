@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type Config from '../interfaces/Config.ts';
+import type Config from '../interfaces/Config.js';
 
 dotenv.config();
 

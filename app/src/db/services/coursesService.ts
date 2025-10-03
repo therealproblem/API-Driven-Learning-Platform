@@ -1,8 +1,8 @@
 import { eq, count, and, ilike, sql, desc } from 'drizzle-orm';
-import db from '../db.ts';
-import bookmarks from '../schema/bookmark.ts';
-import courses from '../schema/courses.ts';
-import progress from '../schema/progress.ts';
+import db from '../db.js';
+import bookmarks from '../schema/bookmark.js';
+import courses from '../schema/courses.js';
+import progress from '../schema/progress.js';
 
 export const getCourseByUserAndCourseId = async (id: string, userId: number) => {
 	const result = await db

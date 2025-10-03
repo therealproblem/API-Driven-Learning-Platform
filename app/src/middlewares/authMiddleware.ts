@@ -3,9 +3,9 @@ import type { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import { Strategy as LocalStrategy } from 'passport-local';
-import config from '../config/config.ts';
-import { refresh } from '../controllers/usersController.ts';
-import { getUserByEmail } from '../db/services/usersService.ts';
+import config from '../config/config.js';
+import { refresh } from '../controllers/usersController.js';
+import { getUserByEmail } from '../db/services/usersService.js';
 
 const publicPaths = ['/user/register', '/dummy/generate'];
 const basicPaths = ['/user/login'];

@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import config from '../config/config.ts';
-import { createUser, getUserByEmail } from '../db/services/usersService.ts';
-import { hash } from '../utils/hashing.ts';
+import config from '../config/config.js';
+import { createUser, getUserByEmail } from '../db/services/usersService.js';
+import { hash } from '../utils/hashing.js';
 
 export const login = (req: Request, res: Response) => {
 	const payload = req.user;
