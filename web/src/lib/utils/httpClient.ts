@@ -19,7 +19,6 @@ const HttpClient = {
 			return response;
 		}
 
-
 		const cookiesHeader = cookies
 			?.getAll()
 			.map((e) => `${e.name}=${e.value}`)

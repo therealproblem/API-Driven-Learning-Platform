@@ -22,9 +22,9 @@
 </script>
 
 <div
-	class="z-1000 min-w-svw absolute left-0 top-0 flex min-h-svh flex-col items-center justify-center gap-6 bg-black/80 p-6 md:p-10"
+	class="absolute top-0 left-0 z-1000 flex min-h-svh min-w-svw flex-col items-center justify-center gap-6 bg-black/80 p-6 md:p-10"
 >
-	<Button variant="ghost" onclick={onclose} class="z-1001 absolute right-20 top-20 cursor-pointer">
+	<Button variant="ghost" onclick={onclose} class="absolute top-20 right-20 z-1001 cursor-pointer">
 		<Close class="size-10" />
 	</Button>
 	<div class="flex w-full max-w-sm flex-col gap-6">
@@ -58,7 +58,7 @@
 										Profile.alias.set(String(result.data?.alias ?? 'P'));
 										Profile.name.set(String(result.data?.name ?? ''));
 										Profile.email.set(String(result.data?.email ?? ''));
-										window.location.reload()
+										window.location.reload();
 										break;
 								}
 							};
@@ -132,7 +132,7 @@
 				</Card.Content>
 			</Card.Root>
 			<div
-				class="text-muted-foreground *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary text-balance text-center text-xs"
+				class="text-center text-xs text-balance text-muted-foreground *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary"
 			>
 				By clicking continue, you agree to our <a href="##">Terms of Service</a>
 				and <a href="##">Privacy Policy</a>.

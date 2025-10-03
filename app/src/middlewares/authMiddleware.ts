@@ -48,8 +48,8 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 			if (user) req.user = user;
 			if (!user && !basicPaths.includes(req.path)) {
 				const result = await refresh(req, res);
-				if (!result.success) return res.status(401).json({ message: 'Unauthorized' });
-			} else if (err) return res.status(404).json({ message: err });
+				if (!result.success) return res.status(401).json({ error: 'Unauthorized' });
+			} else if (err) return res.status(404).json({ error: err });
 			return next();
 		}
 	)(req, res, next);
