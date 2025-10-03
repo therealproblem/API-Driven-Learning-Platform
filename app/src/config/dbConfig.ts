@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type DBConfig from '../models/DBConfig.ts';
+import type DBConfig from '../interfaces/DBConfig.ts';
 
 dotenv.config();
 

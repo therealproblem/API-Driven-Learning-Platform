@@ -1,10 +1,10 @@
-import type { Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 
 export interface AppError extends Error {
 	status?: number;
 }
 
-const errorMiddleware = (err: AppError, res: Response) => {
+const errorMiddleware = (err: AppError, req: Request, res: Response, next: NextFunction) => {
 	res.status(err.status || 500).json({
 		message: err.message || 'Internal Server Error'
 	});

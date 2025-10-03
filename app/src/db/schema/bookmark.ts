@@ -1,4 +1,4 @@
-import { pgTable, serial, timestamp, integer } from 'drizzle-orm/pg-core';
+import { pgTable, serial, timestamp, integer, text } from 'drizzle-orm/pg-core';
 import courses from './courses.ts';
 import users from './users.ts';
 
@@ -7,7 +7,7 @@ const bookmarks = pgTable('bookmarks', {
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
-	courseId: integer('course_id')
+	courseId: text('course_id')
 		.notNull()
 		.references(() => courses.id),
 	createdAt: timestamp('created_at').defaultNow().notNull()

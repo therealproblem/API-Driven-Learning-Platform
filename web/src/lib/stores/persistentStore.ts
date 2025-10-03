@@ -5,11 +5,11 @@ export const createPersistentStore = (key, initialValue) => {
 	// Use browser check for SvelteKit to avoid SSR errors
 	if (browser) {
 		const storedValue = localStorage.getItem(key);
-		const initial = storedValue ? JSON.parse(storedValue) : initialValue;
+		const initial = storedValue ? (JSON.parse(storedValue)?.value ?? '') : initialValue;
 		const store = writable(initial);
 
 		store.subscribe((value) => {
-			localStorage.setItem(key, JSON.stringify(value));
+			localStorage.setItem(key, JSON.stringify({ value }));
 		});
 
 		return store;
