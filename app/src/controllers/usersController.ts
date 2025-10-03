@@ -6,8 +6,6 @@ import { hash } from '../utils/hashing';
 
 const MAX_TOKEN_AGE = '15m';
 const MAX_REFRESH_TOKEN_AGE = '7d';
-// const MAX_TOKEN_AGE = '1m';
-// const MAX_REFRESH_TOKEN_AGE = '1m';
 
 export const login = (req: Request, res: Response) => {
 	const payload = req.user;
