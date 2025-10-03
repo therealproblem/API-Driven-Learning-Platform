@@ -1,4 +1,12 @@
 echo "\n===================================="
+echo "|       Installing Packages        |"
+echo "===================================="
+cd web && npm install &&
+cd ../app && npm install && 
+cd ../
+
+
+echo "\n===================================="
 echo "|          Set Up Docker           |"
 echo "===================================="
 
