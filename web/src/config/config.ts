@@ -1,12 +1,10 @@
-// import dotenv from 'dotenv';
 import type Config from '$lib/types/Config.ts';
 
-// dotenv.config();
-
 const config: Config = {
-	api: import.meta.env['API_HOST'] || 'http://localhost:3000',
-	web: import.meta.env['ORIGIN'] || 'http://localhost:5173',
-	nodeEnv: import.meta.env['NODE_ENV'] || 'development'
+	ssApi: import.meta.env['VITE_SS_API_HOST'] || 'http://localhost:3000',
+	csApi: import.meta.env['VITE_CS_API_HOST'] || 'http://localhost:3000',
+	web: import.meta.env['VITE_ORIGIN'] || 'http://localhost:5173',
+	nodeEnv: import.meta.env['VITE_NODE_ENV'] || 'development'
 };
 
 export default config;

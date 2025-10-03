@@ -6,9 +6,8 @@
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
 	import { Input } from '@/components/ui/input/index.js';
 	import type { HttpClientRequest } from '@/types/API.js';
-	import config from '../../config/config.js';
 	UI.siteHeaderTitle.set('Courses');
-	import HttpClient, { validators } from '@/utils/httpClient.js';
+	import HttpClient, { getApiHost, validators } from '@/utils/httpClient.js';
 
 	const { data } = $props();
 
@@ -29,7 +28,7 @@
 		if (event) event.preventDefault();
 
 		const req: HttpClientRequest = {
-			url: `${config.api}/courses/list`,
+			url: `${getApiHost()}/courses/list`,
 			method: 'POST',
 			validator: validators.courseListSchema,
 			body: { searchTerm, page: currentPage, count: perPage }

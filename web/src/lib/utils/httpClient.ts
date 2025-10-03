@@ -1,22 +1,24 @@
-import type { HttpClientRequest, HttpClientResponse } from '../types/API';
+import type { HttpClientRequest, HttpClientResponse } from '../types/Api';
 import type { AxiosError, AxiosResponse } from 'axios';
 import axios from 'axios';
 import { setTokenCookies } from './cookies';
 import z from 'zod';
 import Profile from '@/stores/user-store';
+import { browser } from '$app/environment';
+import config from '../../config/config';
 
 const HttpClient = {
 	send: async (req: HttpClientRequest): Promise<HttpClientResponse> => {
 		const response: HttpClientResponse = { status: 400, success: false, data: {} };
 
 		const { url, body, validator, method, cookies, headers } = req;
-
 		const parseResult = validator.safeParse(body);
 		if (!parseResult.success) {
 			const msg = parseResult.error.issues.map((e) => e.message).join('\n');
 			response.error = msg;
 			return response;
 		}
+
 
 		const cookiesHeader = cookies
 			?.getAll()
@@ -103,6 +105,11 @@ export const validators = {
 		password: z.string().trim(),
 		email: z.email().trim()
 	})
+};
+
+export const getApiHost = () => {
+	if (browser) return config.csApi;
+	else return config.ssApi;
 };
 
 export default HttpClient;

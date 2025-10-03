@@ -6,8 +6,7 @@
 	import { IconBookmark, IconBookmarkFilled } from '@tabler/icons-svelte';
 	import { toast } from 'svelte-sonner';
 	import type { HttpClientRequest } from '$lib/types/API.js';
-	import config from '../../../config/config';
-	import HttpClient from '@/utils/httpClient.js';
+	import HttpClient, { getApiHost } from '@/utils/httpClient.js';
 	import { validators } from '@/utils/httpClient.js';
 	import { goto } from '$app/navigation';
 	// @ts-expect-error YT is an external script file that will be loaded at the end
@@ -34,7 +33,7 @@
 	const onTick = async () => {
 		lastKnownVideoTime = player?.playerInfo?.mediaReferenceTime ?? 0;
 		const req: HttpClientRequest = {
-			url: `${config.api}/progress/update`,
+			url: `${getApiHost()}/progress/update`,
 			method: 'POST',
 			validator: validators.progressUpdateSchema,
 			body: { id: data.id, lastWatched: Math.floor(lastKnownVideoTime) }
@@ -48,7 +47,7 @@
 		bookmarked = !bookmarked;
 		toast(`"${title}" ${bookmarked ? 'added to' : 'removed from'} bookmarks!`);
 		const req: HttpClientRequest = {
-			url: `${config.api}/bookmarks/update`,
+			url: `${getApiHost()}/bookmarks/update`,
 			method: 'POST',
 			validator: validators.bookmarkUpdateSchema,
 			body: { id: data.id, bookmarked }

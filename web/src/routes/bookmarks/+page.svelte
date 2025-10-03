@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
 	import type { HttpClientRequest } from '@/types/API.js';
-	import config from '../../config/config.js';
+	import { getApiHost } from '@/utils/httpClient.js';
 	import HttpClient, { validators } from '@/utils/httpClient.js';
 	UI.siteHeaderTitle.set('Bookmarks');
 
@@ -25,7 +25,7 @@
 
 	const getCourses = async () => {
 		const req: HttpClientRequest = {
-			url: `${config.api}/bookmarks/list`,
+			url: `${getApiHost()}/bookmarks/list`,
 			method: 'POST',
 			validator: validators.bookmarkListSchema,
 			body: { page: currentPage, count: perPage }

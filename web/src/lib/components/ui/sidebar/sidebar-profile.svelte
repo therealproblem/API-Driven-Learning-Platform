@@ -17,16 +17,8 @@
 	Profile.name.subscribe((value) => (name = value));
 	Profile.email.subscribe((value) => (email = value));
 
-	let showLogin = $state(true);
+	let showLogin = $state(false);
 	let isLogin = $state(true);
-
-	const logout = () => {
-		fetch('/user?/logout', { method: 'POST', body: '' });
-		Profile.alias.set('P');
-		Profile.email.set('');
-		Profile.name.set('');
-		goto('/');
-	};
 
 	onMount(() => {
 		(window as any).showLogin = () => {
@@ -65,7 +57,7 @@
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
 				{#if email !== ''}
-					<DropdownMenu.Item class="text-red-500" onclick={() => logout()}
+					<DropdownMenu.Item class="text-red-500" onclick={() => goto('/user/logout')}
 						>Log out</DropdownMenu.Item
 					>
 				{:else}
