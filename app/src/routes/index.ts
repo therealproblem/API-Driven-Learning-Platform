@@ -1,11 +1,7 @@
-import bookmarks from './bookmarksRoutes';
-import courses from './coursesRoutes';
-import progress from './progressRoutes';
-import users from './usersRoutes';
+import v1 from './v1/';
+import v2 from './v2/';
 
 export default {
-	bookmarks,
-	courses,
-	progress,
-	users
+	v1,
+	v2
 };

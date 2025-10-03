@@ -1,88 +1,14 @@
-<script lang="ts">
-	import CourseCard from '@/components/ui/course-card/course-card.svelte';
-	import UI from '../lib/stores/ui-store.js';
-	import type Course from '@/types/Course.js';
-	import { onMount } from 'svelte';
-	import * as Pagination from '$lib/components/ui/pagination/index.js';
-	import { Input } from '@/components/ui/input/index.js';
-	UI.siteHeaderTitle.set('Courses');
-
-	let courses: Course[] = $state([]);
-
-	let total = $state(0);
-	const perPage = 12;
-	let currentPage = $state(1);
-	let searchTerm = $state('');
-
-	const onPageChange = (page) => {
-		if (currentPage == page) return;
-		currentPage = page;
-		getCourses();
-	};
-
-	const getCourses = async (event?) => {
-		if (event) event.preventDefault();
-		const formData = new FormData();
-		formData.append('searchTerm', searchTerm);
-		formData.append('page', currentPage.toString());
-		formData.append('count', perPage.toString());
-		const res = await fetch('/courses?/list', {
-			method: 'POST',
-			body: formData
-		});
-
-		let data = await res.json();
-		if (data.type !== 'success') return;
-
-		data = JSON.parse(JSON.parse(data.data)[0]);
-		total = data.total;
-		courses = data.courses;
-		window.scrollTo({
-			top: 0,
-			left: 0,
-			behavior: 'smooth'
-		});
-	};
-
-	onMount(() => getCourses());
+<script>
+	import { goto } from '$app/navigation';
+	import Button from '@/components/ui/button/button.svelte';
+	import Book from '@tabler/icons-svelte/icons/book';
 </script>
 
-<form class="flex flex-row flex-wrap justify-evenly gap-5 p-5">
-	<Input
-		id="searchTerm"
-		type="text"
-		name="searchTerm"
-		placeholder="Search"
-		bind:value={searchTerm}
-	/>
-</form>
-<div class="flex flex-row flex-wrap justify-evenly gap-5 p-5">
-	{#each courses as course (course.id)}
-		<CourseCard {...course} />
-	{/each}
-	<Pagination.Root count={total} {perPage} {onPageChange}>
-		{#snippet children({ pages, currentPage })}
-			<Pagination.Content>
-				<Pagination.Item>
-					<Pagination.PrevButton />
-				</Pagination.Item>
-				{#each pages as page (page.key)}
-					{#if page.type === 'ellipsis'}
-						<Pagination.Item>
-							<Pagination.Ellipsis />
-						</Pagination.Item>
-					{:else}
-						<Pagination.Item>
-							<Pagination.Link {page} isActive={currentPage === page.value}>
-								{page.value}
-							</Pagination.Link>
-						</Pagination.Item>
-					{/if}
-				{/each}
-				<Pagination.Item>
-					<Pagination.NextButton />
-				</Pagination.Item>
-			</Pagination.Content>
-		{/snippet}
-	</Pagination.Root>
+<div class="flex h-screen w-screen flex-col items-center justify-center">
+	<div class="flex flex-row">
+		<Book class="!size-38" />
+		<span class="ml-2 text-[100px] font-semibold">LXP</span>
+	</div>
+	<p>Leading learning platform, with tons of amazing resources!</p>
+	<Button class="mt-10" onclick={() => goto('/courses')} variant="default">Explore Courses!</Button>
 </div>

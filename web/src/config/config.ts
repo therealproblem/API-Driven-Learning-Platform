@@ -1,12 +1,11 @@
-import dotenv from 'dotenv';
 import type Config from '$lib/types/Config.ts';
 
-dotenv.config();
-
 const config: Config = {
-	api: process.env['API_HOST'] || 'http://localhost:3000',
-	web: process.env['ORIGIN'] || 'http://localhost:5173',
-	nodeEnv: process.env['NODE_ENV'] || 'development'
+	ssApi: import.meta.env['VITE_SS_API_HOST'] || 'http://localhost:3000',
+	csApi: import.meta.env['VITE_CS_API_HOST'] || 'http://localhost:3000',
+	web: import.meta.env['VITE_ORIGIN'] || 'http://localhost:5173',
+	nodeEnv: import.meta.env['VITE_NODE_ENV'] || 'development',
+	apiVersion: import.meta.env['VITE_API_VERSION'] || '1'
 };
 
 export default config;

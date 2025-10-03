@@ -3,4 +3,5 @@ export default interface Config {
 	nodeEnv: string;
 	jwtSecret: string;
 	refreshTokenSecret: string;
+	webUrl: string;
 }

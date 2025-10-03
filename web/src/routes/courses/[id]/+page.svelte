@@ -1,11 +1,15 @@
 <script lang="ts">
 	import VideoPlayer from '@/components/ui/video-player/video-player.svelte';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import UI from '../../../lib/stores/ui-store.js';
-	import { Button } from '@/components/ui/button/index.js';
+	import { Button } from '@/components/ui/button/index';
 	import { IconBookmark, IconBookmarkFilled } from '@tabler/icons-svelte';
 	import { toast } from 'svelte-sonner';
-	// @ts-expect-error
+	import type { HttpClientRequest } from '$lib/types/API.js';
+	import HttpClient, { getApiHost } from '@/utils/httpClient.js';
+	import { validators } from '@/utils/httpClient.js';
+	import { goto } from '$app/navigation';
+	// @ts-expect-error YT is an external script file that will be loaded at the end
 	let player: YT.Player | null = $state(null);
 	let { data } = $props();
 	let lastKnownVideoTime = $state(data.lastWatched);
@@ -27,30 +31,33 @@
 	const onChange = () => {};
 
 	const onTick = async () => {
-		lastKnownVideoTime = player?.playerInfo.mediaReferenceTime ?? 0;
-		const formData = new FormData();
-		formData.append('lastWatched', lastKnownVideoTime.toString());
-		formData.append('id', data.id);
-		await fetch('/progress?/update', {
+		lastKnownVideoTime = player?.playerInfo?.mediaReferenceTime ?? 0;
+		const req: HttpClientRequest = {
+			url: `${getApiHost()}/progress/update`,
 			method: 'POST',
-			body: formData
-		});
+			validator: validators.progressUpdateSchema,
+			body: { id: data.id, lastWatched: Math.floor(lastKnownVideoTime) }
+		};
+		await HttpClient.send(req);
 	};
 
 	onDestroy(function () {});
 
 	const toggleBookmark = async () => {
 		bookmarked = !bookmarked;
-		let res: Response | null = null;
-		const formData = new FormData();
-		formData.append('bookmarked', bookmarked ? 'true' : 'false');
-		formData.append('id', data.id);
-		await fetch('/bookmarks?/update', {
-			method: 'POST',
-			body: formData
-		});
 		toast(`"${title}" ${bookmarked ? 'added to' : 'removed from'} bookmarks!`);
+		const req: HttpClientRequest = {
+			url: `${getApiHost()}/bookmarks/update`,
+			method: 'POST',
+			validator: validators.bookmarkUpdateSchema,
+			body: { id: data.id, bookmarked }
+		};
+		await HttpClient.send(req);
 	};
+
+	onMount(() => {
+		if (!data.loggedIn) goto('/courses');
+	});
 </script>
 
 <svelte:head>

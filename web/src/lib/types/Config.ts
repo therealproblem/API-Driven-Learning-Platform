@@ -1,5 +1,7 @@
 export default interface Config {
-	api: string;
+	ssApi: string;
+	csApi: string;
 	web: string;
 	nodeEnv: string;
+	apiVersion: string;
 }

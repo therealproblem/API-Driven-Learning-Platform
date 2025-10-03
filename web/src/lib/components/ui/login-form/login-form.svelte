@@ -22,7 +22,7 @@
 </script>
 
 <div
-	class="absolute top-0 left-0 z-1000 flex min-h-svh min-w-svw flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10"
+	class="absolute top-0 left-0 z-1000 flex min-h-svh min-w-svw flex-col items-center justify-center gap-6 bg-black/80 p-6 md:p-10"
 >
 	<Button variant="ghost" onclick={onclose} class="absolute top-20 right-20 z-1001 cursor-pointer">
 		<Close class="size-10" />
@@ -58,10 +58,9 @@
 										Profile.alias.set(String(result.data?.alias ?? 'P'));
 										Profile.name.set(String(result.data?.name ?? ''));
 										Profile.email.set(String(result.data?.email ?? ''));
+										window.location.reload();
 										break;
 								}
-
-								onclose();
 							};
 						}}
 					>

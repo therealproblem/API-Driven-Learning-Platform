@@ -8,7 +8,7 @@
 	const thumbnailURL = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
 </script>
 
-<a href="/courses/{id}">
+<a href={id ? `/courses/${id}` : '#'} data-sveltekit-preload-data="tap">
 	<Card.Root
 		class="relative aspect-square w-80 cursor-pointer justify-between gap-2 overflow-hidden p-0"
 	>

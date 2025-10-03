@@ -6,6 +6,8 @@
 
 	import Profile from '@/stores/user-store';
 	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let alias = $state(get(Profile.alias));
 	let name = $state(get(Profile.name));
@@ -18,12 +20,14 @@
 	let showLogin = $state(false);
 	let isLogin = $state(true);
 
-	const logout = () => {
-		fetch('/user?/logout', { method: 'POST', body: '' });
-		Profile.alias.set('P');
-		Profile.email.set('');
-		Profile.name.set('');
-	};
+	onMount(() => {
+		(window as any).showLogin = () => {
+			showLogin = true;
+			Profile.alias.set('P');
+			Profile.email.set('');
+			Profile.name.set('');
+		};
+	});
 </script>
 
 {#if showLogin}
@@ -53,7 +57,7 @@
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
 				{#if email !== ''}
-					<DropdownMenu.Item class="text-red-500" onclick={() => logout()}
+					<DropdownMenu.Item class="text-red-500" onclick={() => goto('/user/logout')}
 						>Log out</DropdownMenu.Item
 					>
 				{:else}

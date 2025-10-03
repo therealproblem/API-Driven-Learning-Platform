@@ -3,11 +3,13 @@
 
 	let { id, player = $bindable(), onReady, onChange, onTick } = $props();
 
+	let updateInterval: NodeJS.Timeout | null = $state(null);
+
 	player = null;
 	let container: HTMLDivElement;
 	const loadYouTubeAPI = () => {
 		return new Promise<void>((resolve) => {
-			// @ts-expect-error
+			// @ts-expect-error YT is an external script file that will be loaded at the end
 			if (window.YT && window.YT.Player) {
 				resolve();
 				return;
@@ -22,7 +24,7 @@
 
 	onMount(async () => {
 		await loadYouTubeAPI();
-		// @ts-expect-error
+		// @ts-expect-error YT is an external script file that will be loaded at the end
 		player = new YT.Player(container, {
 			videoId: id,
 			playerVars: {
@@ -30,7 +32,8 @@
 			},
 			events: {
 				onReady: () => {
-					setInterval(onTick, 1000);
+					const tokenExist = document.cookie.match(/(?:^|; )accessToken=([^;]*)/);
+					if (!tokenExist) updateInterval = setInterval(onTick, 1000);
 					onReady();
 				},
 				onStateChange: () => onChange()
@@ -43,6 +46,7 @@
 			player.destroy();
 			player = null;
 		}
+		if (updateInterval) clearInterval(updateInterval);
 	});
 </script>
 

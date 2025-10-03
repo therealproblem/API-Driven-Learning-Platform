@@ -7,8 +7,8 @@ import config from '../config/config';
 import { refresh } from '../controllers/usersController';
 import { getUserByEmail } from '../db/services/usersService';
 
-const publicPaths = ['/user/register', '/dummy/generate'];
-const basicPaths = ['/user/login'];
+const publicPaths = ['/api/user/register', '/api/dummy/generate'];
+const basicPaths = ['/api/user/login'];
 
 const cookieExtractor = (req: Request): string | null => {
 	return req?.cookies['accessToken'];
@@ -44,12 +44,12 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	passport.authenticate(
 		basicPaths.includes(req.path) ? 'local' : 'jwt',
 		{ session: false },
-		async (err, user, info) => {
+		async (err, user) => {
 			if (user) req.user = user;
 			if (!user && !basicPaths.includes(req.path)) {
 				const result = await refresh(req, res);
-				if (!result.success) return res.status(401).json({ message: 'Unauthorized' });
-			} else if (err) return res.status(404).json({ message: err });
+				if (!result.success) return res.status(401).json({ error: 'Unauthorized' });
+			} else if (err) return res.status(404).json({ error: err });
 			return next();
 		}
 	)(req, res, next);
