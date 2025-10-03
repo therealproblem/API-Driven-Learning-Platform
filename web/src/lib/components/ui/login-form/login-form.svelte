@@ -81,7 +81,6 @@
 										name="email"
 										placeholder="john-doe@example.com"
 										required
-										value="test5@example.com"
 									/>
 								</div>
 								<div class="grid gap-3">
@@ -99,7 +98,6 @@
 										name="password"
 										placeholder="********"
 										required
-										value="Qwerty1234!"
 									/>
 								</div>
 								{#if !isLogin}

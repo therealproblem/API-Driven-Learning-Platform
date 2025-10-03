@@ -6,7 +6,6 @@ import HttpClient, { validators } from '@/utils/httpClient';
 
 const login = async ({ cookies, request }) => {
 	const data = Object.fromEntries(await request.formData());
-	console.log(data);
 	const req: HttpClientRequest = {
 		url: `${config.api}/user/login`,
 		method: 'POST',
