@@ -7,6 +7,7 @@
 	import Profile from '@/stores/user-store';
 	import { get } from 'svelte/store';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let alias = $state(get(Profile.alias));
 	let name = $state(get(Profile.name));
@@ -24,6 +25,7 @@
 		Profile.alias.set('P');
 		Profile.email.set('');
 		Profile.name.set('');
+		goto('/');
 	};
 
 	onMount(() => {
