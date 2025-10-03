@@ -2,6 +2,10 @@ echo "\n===================================="
 echo "|          Set Up Docker           |"
 echo "===================================="
 
+cp .example.env         .env
+cp users.example.yml    users.yml
+cp ./app/.example.env   ./app/.env
+cp ./web/.example.env   ./web/.env
 docker compose up -d && sleep 5
 
 echo "\n===================================="
