@@ -1,6 +1,6 @@
 import { pgTable, serial, timestamp, integer, text } from 'drizzle-orm/pg-core';
-import courses from './courses.js';
-import users from './users.js';
+import courses from './courses';
+import users from './users';
 
 const progress = pgTable('progress', {
 	id: serial('id').primaryKey(),

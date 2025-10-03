@@ -1,6 +1,6 @@
 import { eq, and } from 'drizzle-orm';
-import db from '../db.js';
-import progress from '../schema/progress.js';
+import db from '../db';
+import progress from '../schema/progress';
 
 export const getProgressByUserAndCourseId = async (userId: number, courseId: string) => {
 	const result = await db

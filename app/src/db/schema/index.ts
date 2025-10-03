@@ -1,7 +1,7 @@
-import bookmarks from './bookmark.js';
-import courses from './courses.js';
-import progress from './progress.js';
-import users from './users.js';
+import bookmarks from './bookmarks';
+import courses from './courses';
+import progress from './progress';
+import users from './users';
 
 export default {
 	users,

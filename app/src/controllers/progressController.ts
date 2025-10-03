@@ -3,7 +3,7 @@ import {
 	insertProgress,
 	getProgressByUserAndCourseId,
 	updateProgress
-} from '../db/services/progressService.js';
+} from '../db/services/progressService';
 
 export const update = async (req: Request, res: Response) => {
 	if (!req.user) return res.send(403);

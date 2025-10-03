@@ -3,7 +3,7 @@ import {
 	getCourseByUserAndCourseId,
 	getCourses,
 	getNumCourses
-} from '../db/services/coursesService.js';
+} from '../db/services/coursesService';
 
 export const list = async (req: Request, res: Response) => {
 	if (!req.user) return res.send(403);

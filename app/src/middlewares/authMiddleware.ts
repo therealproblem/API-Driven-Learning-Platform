@@ -3,9 +3,9 @@ import type { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import { Strategy as LocalStrategy } from 'passport-local';
-import config from '../config/config.js';
-import { refresh } from '../controllers/usersController.js';
-import { getUserByEmail } from '../db/services/usersService.js';
+import config from '../config/config';
+import { refresh } from '../controllers/usersController';
+import { getUserByEmail } from '../db/services/usersService';
 
 const publicPaths = ['/user/register', '/dummy/generate'];
 const basicPaths = ['/user/login'];
@@ -49,7 +49,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 			if (!user && !basicPaths.includes(req.path)) {
 				const result = await refresh(req, res);
 				if (!result.success) return res.status(401).json({ message: 'Unauthorized' });
-			}
+			} else if (err) return res.status(404).json({ message: err });
 			return next();
 		}
 	)(req, res, next);

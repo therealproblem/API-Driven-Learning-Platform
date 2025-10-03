@@ -1,10 +1,11 @@
+import path from 'path';
 import type { Config } from 'drizzle-kit';
-import dbConfig from './src/config/dbConfig';
-import config from './src/config/config';
+import config from '../config/config';
+import dbConfig from '../config/dbConfig';
 
 export default {
-	schema: './src/db/schema',
-	out: './src/db/migrations',
+	schema: path.resolve(__dirname, './schema'),
+	out: path.resolve(__dirname, './migrations'),
 	dialect: 'postgresql',
 	dbCredentials: {
 		host: dbConfig.host,

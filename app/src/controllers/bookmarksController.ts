@@ -5,7 +5,7 @@ import {
 	getBookmarkByUserAndCourseId,
 	getBookmarksByUserId,
 	getNumBookmarksByUserId
-} from '../db/services/bookmarksService.js';
+} from '../db/services/bookmarksService';
 
 export const update = async (req: Request, res: Response) => {
 	if (!req.user) return res.send(403);

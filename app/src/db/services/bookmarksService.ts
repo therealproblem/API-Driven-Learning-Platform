@@ -1,8 +1,8 @@
 import { eq, count, and, sql, desc } from 'drizzle-orm';
-import db from '../db.js';
-import bookmarks from '../schema/bookmark.js';
-import courses from '../schema/courses.js';
-import progress from '../schema/progress.js';
+import db from '../db';
+import bookmarks from '../schema/bookmarks';
+import courses from '../schema/courses';
+import progress from '../schema/progress';
 
 export const getBookmarksByUserId = async (id: number, page: number, count: number) => {
 	const result = await db
