@@ -2,7 +2,7 @@ import { fail, type Actions } from '@sveltejs/kit';
 import axios, { AxiosError } from 'axios';
 import type { PageServerLoad } from './$types';
 import config from '../../../config/config';
-import { setTokenCookies } from '@/token-utils';
+import { setTokenCookies } from '@/utils/cookies';
 
 export const load: PageServerLoad = async ({ cookies, params }) => {
 	const cookiesHeader =

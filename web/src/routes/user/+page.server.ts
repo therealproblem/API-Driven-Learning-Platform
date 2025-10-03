@@ -3,7 +3,8 @@ import { fail } from '@sveltejs/kit';
 import { z } from 'zod';
 import axios, { AxiosError } from 'axios';
 import config from '../../config/config';
-import { setTokenCookies } from '@/token-utils';
+import { setTokenCookies } from '@/utils/cookies';
+import { createAlias } from '@/utils/alias';
 
 const registerSchema = z
 	.object({
@@ -31,17 +32,6 @@ const loginSchema = z.object({
 	password: z.string().trim(),
 	email: z.email().trim()
 });
-
-const createAlias = (name: string) => {
-	const words = name.split(' ');
-	// If there is only one word, return the first two characters
-	if (words.length < 2) {
-		return words[0].slice(0, 2).toUpperCase();
-	}
-
-	// Return the first initial of the first and last word
-	return (words[0][0] + words[words.length - 1][0]).toUpperCase();
-};
 
 const login = async ({ cookies, request }) => {
 	const data = Object.fromEntries(await request.formData());
