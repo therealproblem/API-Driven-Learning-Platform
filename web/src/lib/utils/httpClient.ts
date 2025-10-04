@@ -12,11 +12,13 @@ const HttpClient = {
 		const response: HttpClientResponse = { status: 400, success: false, data: {} };
 
 		const { url, body, validator, method, cookies, headers } = req;
-		const parseResult = validator.safeParse(body);
-		if (!parseResult.success) {
-			const msg = parseResult.error.issues.map((e) => e.message).join('\n');
-			response.error = msg;
-			return response;
+		if (validator) {
+			const parseResult = validator.safeParse(body);
+			if (!parseResult.success) {
+				const msg = parseResult.error.issues.map((e) => e.message).join('\n');
+				response.error = msg;
+				return response;
+			}
 		}
 
 		const cookiesHeader = cookies
@@ -55,6 +57,7 @@ const HttpClient = {
 		}
 
 		if (res.headers['set-cookie'] && cookies) setTokenCookies(cookies, res.headers['set-cookie']);
+
 		response.status = res.status;
 		response.data = res.data;
 		response.error = undefined;

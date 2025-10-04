@@ -3,6 +3,6 @@ import { byId, list } from '../../controllers/coursesController';
 const router = express.Router();
 
 router.get('/list', list);
-router.get('/id', byId);
+router.get('/id/:id', byId);
 
 export default router;

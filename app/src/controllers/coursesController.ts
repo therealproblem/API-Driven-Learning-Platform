@@ -25,7 +25,7 @@ export const list = async (req: Request, res: Response) => {
 
 export const byId = async (req: Request, res: Response) => {
 	if (!req.user) return res.send(403);
-	const { id } = req.query;
+	const { id } = req.params;
 	const userId = (req.user as { id: number })!.id;
 	const result = await getCourseByUserAndCourseId(id as string, userId);
 	if (!result) return res.send(400);

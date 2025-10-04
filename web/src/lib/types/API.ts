@@ -4,7 +4,7 @@ import type z from 'zod';
 export interface HttpClientRequest {
 	url: string;
 	body: Record<string, string | number | boolean | object | null | undefined>;
-	validator: z.ZodObject;
+	validator?: z.ZodObject;
 	headers?: Record<string, string>;
 	method: 'GET' | 'POST' | 'PUT' | 'DELETE';
 	cookies?: Cookies;

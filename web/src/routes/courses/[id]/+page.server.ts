@@ -1,14 +1,12 @@
 import type { PageServerLoad } from './$types';
 import type { HttpClientRequest } from '$lib/types/Api';
-import HttpClient, { getApiHost, validators } from '@/utils/httpClient';
+import HttpClient, { getApiHost } from '@/utils/httpClient';
 
 export const load: PageServerLoad = async ({ cookies, params }) => {
 	const accessToken = cookies.get('accessToken');
 	const req: HttpClientRequest = {
-		url: `${getApiHost()}/courses/id`,
+		url: `${getApiHost()}/courses/id/${params.id}`,
 		method: 'GET',
-		validator: validators.courseIdSchema,
-		body: { id: params.id },
 		cookies
 	};
 
