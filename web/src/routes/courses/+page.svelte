@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
 	import { Input } from '@/components/ui/input/index.js';
-	import type { HttpClientRequest } from '@/types/API.js';
+	import type { HttpClientRequest } from '$lib/types/Api';
 	UI.siteHeaderTitle.set('Courses');
 	import HttpClient, { getApiHost, validators } from '@/utils/httpClient.js';
 
@@ -29,7 +29,7 @@
 
 		const req: HttpClientRequest = {
 			url: `${getApiHost()}/courses/list`,
-			method: 'POST',
+			method: 'GET',
 			validator: validators.courseListSchema,
 			body: { searchTerm, page: currentPage, count: perPage }
 		};

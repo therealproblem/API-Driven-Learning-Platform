@@ -5,7 +5,7 @@
 	import { Button } from '@/components/ui/button/index';
 	import { IconBookmark, IconBookmarkFilled } from '@tabler/icons-svelte';
 	import { toast } from 'svelte-sonner';
-	import type { HttpClientRequest } from '$lib/types/API.js';
+	import type { HttpClientRequest } from '$lib/types/Api';
 	import HttpClient, { getApiHost } from '@/utils/httpClient.js';
 	import { validators } from '@/utils/httpClient.js';
 	import { goto } from '$app/navigation';

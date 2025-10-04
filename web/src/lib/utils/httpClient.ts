@@ -33,7 +33,7 @@ const HttpClient = {
 				data: method !== 'GET' ? { ...body } : undefined,
 				headers: {
 					'Content-Type': 'application/json',
-					'Accept': `application/vnd.lxp.v${config.apiVersion}+json`,
+					Accept: `application/vnd.lxp.v${config.apiVersion}+json`,
 					...(cookies ? { Cookie: `${cookiesHeader};` } : {}),
 					...headers
 				},
