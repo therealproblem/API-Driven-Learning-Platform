@@ -1,9 +1,10 @@
 # API-Driven Learning Platform
 
+A web application that integrates with external APIs to create a comprehensive learning experience. Students can search for learning resources, save content, and track their progress.
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=giwMG29te10" target="_blank">
  <img src="http://img.youtube.com/vi/giwMG29te10/mqdefault.jpg" alt="Watch the video" width="720" height="600" border="10" />
 </a>
-A web application that integrates with external APIs to create a comprehensive learning experience. Students can search for learning resources, save content, and track their progress.
 
 ## Table of Content
 
