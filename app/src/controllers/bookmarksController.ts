@@ -19,9 +19,13 @@ export const update = async (req: Request, res: Response) => {
 
 export const list = async (req: Request, res: Response) => {
 	if (!req.user) return res.send(403);
-	const { page, count } = req.body;
+	const { page, count } = req.query;
 	const userId = (req.user as { id: number })!.id;
-	let result = await getBookmarksByUserId(userId, page, count);
+	let result = await getBookmarksByUserId(
+		userId,
+		parseInt(page as string),
+		parseInt(count as string)
+	);
 	const total = await getNumBookmarksByUserId(userId);
 	result = result.map((r) => ({
 		...r,

@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
 	const accessToken = cookies.get('accessToken');
 	const req: HttpClientRequest = {
 		url: `${getApiHost()}/courses/id`,
-		method: 'POST',
+		method: 'GET',
 		validator: validators.courseIdSchema,
 		body: { id: params.id },
 		cookies
