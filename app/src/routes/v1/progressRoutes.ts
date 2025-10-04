@@ -2,6 +2,6 @@ import express from 'express';
 import { update } from '../../controllers/progressController';
 const router = express.Router();
 
-router.post('/update', update);
+router.put('/update/', update);
 
 export default router;

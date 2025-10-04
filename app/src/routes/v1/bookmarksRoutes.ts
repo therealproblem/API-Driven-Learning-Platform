@@ -3,6 +3,6 @@ import { update, list } from '../../controllers/bookmarksController';
 const router = express.Router();
 
 router.get('/list', list);
-router.post('/update', update);
+router.put('/update/', update);
 
 export default router;

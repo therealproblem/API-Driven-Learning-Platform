@@ -34,7 +34,7 @@
 		lastKnownVideoTime = player?.playerInfo?.mediaReferenceTime ?? 0;
 		const req: HttpClientRequest = {
 			url: `${getApiHost()}/progress/update`,
-			method: 'POST',
+			method: 'PUT',
 			validator: validators.progressUpdateSchema,
 			body: { id: data.id, lastWatched: Math.floor(lastKnownVideoTime) }
 		};
@@ -48,7 +48,7 @@
 		toast(`"${title}" ${bookmarked ? 'added to' : 'removed from'} bookmarks!`);
 		const req: HttpClientRequest = {
 			url: `${getApiHost()}/bookmarks/update`,
-			method: 'POST',
+			method: 'PUT',
 			validator: validators.bookmarkUpdateSchema,
 			body: { id: data.id, bookmarked }
 		};
