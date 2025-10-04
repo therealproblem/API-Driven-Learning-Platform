@@ -1,0 +1,7 @@
+users:
+    admin:
+        email: test@email.net
+        name: Admin
+        password: $2a$11$wIVbtF0cCF88QZdDvlgnIeLjriLMUUsymFMbp3YAmbDfmImKNwwO. # password
+        filter:
+        roles:

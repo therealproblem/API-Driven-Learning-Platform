@@ -7,7 +7,7 @@ import config from '../config/config';
 import { refresh } from '../controllers/usersController';
 import { getUserByEmail } from '../db/services/usersService';
 
-const publicPaths = ['/api/user/register', '/api/dummy/generate'];
+const publicPaths = ['/api/user/register', '/api/dummy/generate', '/api/status'];
 const basicPaths = ['/api/user/login'];
 
 const cookieExtractor = (req: Request): string | null => {
