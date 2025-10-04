@@ -11,7 +11,8 @@
 		"format": "prettier --write .",
 		"db:generate": "npx drizzle-kit --config=./src/db/drizzle.config.ts generate",
 		"db:migrate": "npx drizzle-kit --config=./src/db/drizzle.config.ts push",
-		"deploy": "npm run db:migrate && node dist/server.js"
+		"deploy": "npm run db:migrate && node dist/server.js",
+		"test": "jest"
 	},
 	"keywords": [],
 	"author": "",
@@ -46,6 +47,7 @@
 		"@types/node": "^24.6.1",
 		"@types/passport-local": "^1.0.38",
 		"@types/pg": "^8.15.5",
+		"@types/supertest": "^6.0.3",
 		"@typescript-eslint/eslint-plugin": "^8.45.0",
 		"@typescript-eslint/parser": "^8.45.0",
 		"drizzle-kit": "^0.31.5",
@@ -57,6 +59,7 @@
 		"jest": "^30.2.0",
 		"nodemon": "^3.1.10",
 		"prettier": "^3.6.2",
+		"supertest": "^7.1.4",
 		"ts-jest": "^29.4.4",
 		"ts-node": "^10.9.2",
 		"tsx": "^4.20.6",

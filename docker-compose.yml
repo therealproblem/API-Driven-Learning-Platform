@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - ./app/docker.env
+      - ./app/.docker.env
     depends_on:
       - db
     ports:
@@ -42,7 +42,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - ./web/docker.env
+      - ./web/.docker.env
     depends_on:
       - app
     ports:

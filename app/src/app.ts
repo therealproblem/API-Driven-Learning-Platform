@@ -11,6 +11,8 @@ import errorMiddleware from './middlewares/errorMiddleware';
 
 const app = express();
 
+app.post('/api/dummy/generate', generateData);
+
 // Middlewares
 app.use(helmet());
 app.use(corsMiddleware);
@@ -19,7 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(passport.initialize());
-app.post('/dummy/generate', generateData);
 app.use(authMiddleware);
 app.use('/api', apiVersioningMiddleware);
 
