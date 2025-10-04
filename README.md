@@ -1,6 +1,16 @@
 # API-Driven Learning Platform
 A web application that integrates with external APIs to create a comprehensive learning experience. Students can search for learning resources, save content, and track their progress.
 
+## Table of Content
+
+[Installation](#installation)
+
+[Exploring the project](#exploring-the-project)
+
+[API Design Philosophy](#api-design-philosophy)
+
+[Future Improvements](#future-improvements)
+
 ---
 # Installation
  There are 2 ways to run the project, each progressively tedious.
